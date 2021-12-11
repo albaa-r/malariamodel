@@ -9,10 +9,10 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads/'
 model = load_model('model.h5')
 
-class_dict = {0: 'Cat (Kucing)', 1: 'Dog (Anjing)'}
+class_dict = {0: 'Infected', 1: 'Uninfected'}
 
 def predict_label(img_path):
-    loaded_img = load_img(img_path, target_size=(256, 256))
+    loaded_img = load_img(img_path, target_size=(120, 120))
     img_array = img_to_array(loaded_img) / 255.0
     img_array = expand_dims(img_array, 0)
     predicted_bit = np.round(model.predict(img_array)[0][0]).astype('int')
